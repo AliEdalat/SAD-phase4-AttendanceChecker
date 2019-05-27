@@ -1,16 +1,11 @@
 package exam;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.CancellationException;
-
-import org.omg.CORBA.DATA_CONVERSION;
-
 import course.Course;
 import person.Professor;
 import person.Student;
@@ -26,12 +21,13 @@ public class Exam {
 	private Room room;
 	private Course course;
 	
-	public Exam(int examId, String date, String start, String end, Course course, Room room, Professor professor,
-			ArrayList<Student> students) throws ParseException {
+	public Exam(int examId, String start, String end, Course course, Room room, Professor professor,
+			ArrayList<Student> students) {
 		this.examId = examId;
 		this.room = room;
 		this.course = course;
 		this.professor = professor;
+		this.students = new HashMap<>();
 		for(Student student : students) {
 			this.students.put(student.getId(), student);
 		}
@@ -46,9 +42,11 @@ public class Exam {
 			if (time.charAt(i) == 'h') {
 				timeParts[0] = Integer.parseInt(temp);
 				temp = "";
+				continue;
 			} else if (time.charAt(i) == 'm') {
 				timeParts[1] = Integer.parseInt(temp);
 				temp = "";
+				continue;
 			}
 			temp += time.charAt(i);
 		}
@@ -90,7 +88,7 @@ public class Exam {
 		}
 	}
 	
-	public boolean findstudentByName(String firstName, String lastName) throws Exception {
+	public boolean findstudentByName(String firstName, String lastName) {
 		Collection<Student> all = students.values();
 		for(Student student : all) {
 			if (student.getLastName().equals(lastName) && student.getFirstName().equals(firstName)) {
@@ -98,5 +96,15 @@ public class Exam {
 			}
 		}
 		return false;
+	}
+	
+	public String findStudenId(String firstName, String lastName) throws Exception {
+		Collection<Student> all = students.values();
+		for(Student student : all) {
+			if (student.getLastName().equals(lastName) && student.getFirstName().equals(firstName)) {
+				return student.getId();
+			}
+		}
+		throw new Exception(firstName + " " + lastName + " can not participant in " + examId + "exam");
 	}
 }
