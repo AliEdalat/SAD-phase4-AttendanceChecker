@@ -7,14 +7,18 @@ import java.util.ArrayList;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.jsoniter.JsonIterator;
+import com.jsoniter.output.JsonStream;
 
 import cli.*;
 import cli.command.*;
 import dto.DayExams;
+import dto.PostBody;
 import exam.Exam;
 import exam.ExamAttendance;
 
@@ -27,6 +31,21 @@ public class Attendance {
 	
 	private Attendance() {
 		isFinished = false;
+	}
+	
+	private void post(String completeUrl, String body) {
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+	    HttpPost httpPost = new HttpPost(completeUrl);
+	    httpPost.setHeader("Content-type", "application/json");
+	    try {
+	        StringEntity stringEntity = new StringEntity(body);
+	        httpPost.getRequestLine();
+	        httpPost.setEntity(stringEntity);
+
+	        httpclient.execute(httpPost);
+	    } catch (Exception e) {
+	        throw new RuntimeException(e);
+	    }
 	}
 	
 	private String extractGetData(HttpGet httpGet) throws IOException {
@@ -54,6 +73,15 @@ public class Attendance {
         String total = this.extractGetData(httpGet);
         DayExams examsList = JsonIterator.deserialize(total, DayExams.class);
         this.todayExams = examsList.getExams();
+//        ArrayList<String> list =  new ArrayList<>();
+//        try {
+//			list.add(todayExams.get(0).findStudenId("عماد", "جبار"));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        String d = JsonStream.serialize(new PostBody(todayExams.get(0).getExamId(), true, list));
+//        post("http://142.93.134.194:8088/api/attendance", d);
 	}
 	
 	public void run() {
