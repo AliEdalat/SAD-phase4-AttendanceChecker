@@ -2,19 +2,19 @@ package cli.command;
 
 import java.io.IOException;
 
-import Attendance.Attendance;
+import attendance.AttendanceChecker;
 
 public class FetchCommand implements Command {
 
-	private Attendance attendance = Attendance.getInstance();
+	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance().getInstance();
 	
 	public void execute() {
 		try {
-			attendance.fetchExams();
+			attendanceChecker.fetchExams();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 			System.out.println("can not fetch exams' information.");
-			attendance.setFinished(true);
+			attendanceChecker.setFinished(true);
 		}
 	}
 

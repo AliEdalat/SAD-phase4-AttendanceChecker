@@ -1,16 +1,14 @@
 package person;
 
-public class Student extends Person{
-	
-	private int chairNumber;
+import card.StudentCard;
 
-	public Student(String firstName, String lastName, String id, int chairNumber) {
+public class Student extends Person{
+
+	private StudentCard studentCard;
+
+	public Student(String firstName, String lastName, String id) {
 		super(firstName, lastName, id);
-		this.chairNumber = chairNumber;
-	}
-	
-	public int getChairNumber() {
-		return chairNumber;
+		studentCard = new StudentCard(id);
 	}
 
 }

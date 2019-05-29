@@ -30,8 +30,8 @@ public class DayExams {
 	
 	public ArrayList<Exam> getExams() {
 		ArrayList<Exam> exams = new ArrayList<>();
-		for(ExamDTO edto : classes) {
-			exams.add(edto.getExam());
+		for(ExamDTO examDTO : classes) {
+			exams.add(examDTO.getExam());
 		}
 		return exams;
 	}

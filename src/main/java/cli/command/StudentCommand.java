@@ -1,13 +1,13 @@
 package cli.command;
 
-import Attendance.Attendance;
+import attendance.AttendanceChecker;
 
 public class StudentCommand implements Command {
 
 	private String sid;
 	private String firstName;
 	private String lastName;
-	private Attendance attendance = Attendance.getInstance();
+	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance();
 	
 	public StudentCommand(String sid) {
 		this.sid = sid;

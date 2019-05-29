@@ -1,11 +1,11 @@
 package cli.command;
 
-import Attendance.Attendance;
+import attendance.AttendanceChecker;
 
 public class ExamCommand implements Command{
 	
 	private int eid;
-	private Attendance attendance = Attendance.getInstance();
+	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance();
 	
 	public ExamCommand(int eid) {
 		this.eid = eid;

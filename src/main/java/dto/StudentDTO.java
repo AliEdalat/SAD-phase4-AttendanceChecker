@@ -32,7 +32,7 @@ public class StudentDTO {
 		return chair_number;
 	}
 
-	public Student getStudent() {
-		return new Student(first_name, last_name, String.valueOf(id), chair_number);
-	}
+//	public Student getStudent() {
+//		return new Student(first_name, last_name, String.valueOf(id), chair_number);
+//	}
 }

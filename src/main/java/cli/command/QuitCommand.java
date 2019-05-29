@@ -1,13 +1,13 @@
 package cli.command;
 
-import Attendance.Attendance;
+import attendance.AttendanceChecker;
 
 public class QuitCommand implements Command {
 
-	private Attendance attendance = Attendance.getInstance();
-	
+	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance();
+
 	public void execute() {
-		attendance.setFinished(true);
+		attendanceChecker.setFinished(true);
 	}
 
 }

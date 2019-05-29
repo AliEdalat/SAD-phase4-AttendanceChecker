@@ -1,8 +1,8 @@
-import Attendance.Attendance;
+import attendance.AttendanceChecker;
 
 public class Main {
 	public static void main(String[] args) {
-		Attendance attendance = Attendance.getInstance();
-		attendance.run();
+		AttendanceChecker attendanceChecker = AttendanceChecker.getInstance();
+		attendanceChecker.run();
 	}
 }

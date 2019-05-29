@@ -1,6 +1,5 @@
 package exam;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -9,28 +8,22 @@ import java.util.HashMap;
 import course.Course;
 import person.Professor;
 import person.Student;
+import presentation.Presentation;
 import room.Room;
 
 public class Exam {
 	
-	private int examId;
+	private int id;
 	private Date start;
 	private Date end;
-	private Professor professor;
-	private HashMap<String, Student> students;
+	private Presentation presentation;
 	private Room room;
-	private Course course;
 	
-	public Exam(int examId, String start, String end, Course course, Room room, Professor professor,
+	public Exam(int examId, String start, String end, Presentation presentation, Room room,
 			ArrayList<Student> students) {
-		this.examId = examId;
+		this.id = examId;
 		this.room = room;
-		this.course = course;
-		this.professor = professor;
-		this.students = new HashMap<>();
-		for(Student student : students) {
-			this.students.put(student.getId(), student);
-		}
+		this.presentation = presentation;
 		this.start = convertTimeStringToDate(start);
 		this.end = convertTimeStringToDate(end);
 	}
@@ -57,7 +50,7 @@ public class Exam {
 	}
 	
 	public int getExamId() {
-		return examId;
+		return id;
 	}
 	
 	public Date getStart() {
@@ -67,44 +60,37 @@ public class Exam {
 	public Date getEnd() {
 		return end;
 	}
-	
-	public Professor getProfessor() {
-		return professor;
-	}
-	
+
 	public Room getRoom() {
 		return room;
 	}
 	
-	public Course getCourse() {
-		return course;
-	}
-	
-	public boolean findStudentById(String sId) {
-		if (students.containsKey(sId)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean findstudentByName(String firstName, String lastName) {
-		Collection<Student> all = students.values();
-		for(Student student : all) {
-			if (student.getLastName().equals(lastName) && student.getFirstName().equals(firstName)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public String findStudenId(String firstName, String lastName) throws Exception {
-		Collection<Student> all = students.values();
-		for(Student student : all) {
-			if (student.getLastName().equals(lastName) && student.getFirstName().equals(firstName)) {
-				return student.getId();
-			}
-		}
-		throw new Exception(firstName + " " + lastName + " can not participant in " + examId + "exam");
-	}
+//	public boolean findStudentById(String sId) {
+//		if (students.containsKey(sId)) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
+//
+//	public boolean findstudentByName(String firstName, String lastName) {
+//		Collection<Student> all = students.values();
+//		for(Student student : all) {
+//			if (student.getLastName().equals(lastName) && student.getFirstName().equals(firstName)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//
+//	public String findStudenId(String firstName, String lastName) throws Exception {
+//		Collection<Student> all = students.values();
+//		for(Student student : all) {
+//			if (student.getLastName().equals(lastName) && student.getFirstName().equals(firstName)) {
+//				return student.getId();
+//			}
+//		}
+//		throw new Exception(firstName + " " + lastName + " can not participant in " + id + "exam");
+//	}
 }
+//TODO: what about exam time ? Date is not sufficent!

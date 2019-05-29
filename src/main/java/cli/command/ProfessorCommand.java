@@ -1,11 +1,11 @@
 package cli.command;
 
-import Attendance.Attendance;
+import attendance.AttendanceChecker;
 
 public class ProfessorCommand implements Command {
 
 	private String pid;
-	private Attendance attendance = Attendance.getInstance();
+	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance();
 	
 	public ProfessorCommand(String pid) {
 		this.pid = pid;
