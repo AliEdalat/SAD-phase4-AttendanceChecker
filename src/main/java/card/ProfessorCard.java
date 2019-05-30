@@ -2,7 +2,7 @@ package card;
 
 public class ProfessorCard extends Card {
 
-	public ProfessorCard(String cardId) {
+	public ProfessorCard(int cardId) {
 		super(cardId);
 	}
 

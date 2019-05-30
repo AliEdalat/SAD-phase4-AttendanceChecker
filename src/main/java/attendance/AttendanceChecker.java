@@ -21,7 +21,7 @@ import cli.*;
 public class AttendanceChecker {
 	
 	private static final AttendanceChecker instance = new AttendanceChecker();
-	private ArrayList<ExamAttendance> ExamAttendances;
+	private ArrayList<ExamAttendance> examAttendances;
 	private boolean isFinished;
 	
 	private AttendanceChecker() {
@@ -52,7 +52,7 @@ public class AttendanceChecker {
 		HttpGet httpGet = new HttpGet("http://142.93.134.194:8088/api/attendance");
 		String total = this.extractGetData(httpGet);
 		DayExams examsList = JsonIterator.deserialize(total, DayExams.class);
-//		this.todayExams = examsList.getExams();
+		this.examAttendances = examsList.getExams();
 //        ArrayList<String> list =  new ArrayList<>();
 //        try {
 //			list.add(todayExams.get(0).findStudenId("عماد", "جبار"));

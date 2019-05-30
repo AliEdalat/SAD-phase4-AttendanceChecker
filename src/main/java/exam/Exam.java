@@ -2,11 +2,7 @@ package exam;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import course.Course;
-import person.Professor;
 import person.Student;
 import presentation.Presentation;
 import room.Room;
@@ -23,7 +19,7 @@ public class Exam {
 			ArrayList<Student> students) {
 		this.id = examId;
 		this.room = room;
-		this.presentation = presentation;
+		this.presentation = new Presentation();
 		this.start = convertTimeStringToDate(start);
 		this.end = convertTimeStringToDate(end);
 	}

@@ -4,15 +4,15 @@ public class Person {
 	
 	private String firstName;
 	private String lastName;
-	private String id;
+	private int id;
 	
-	public Person(String firstName, String lastName, String id) {
+	public Person(String firstName, String lastName, int id) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	

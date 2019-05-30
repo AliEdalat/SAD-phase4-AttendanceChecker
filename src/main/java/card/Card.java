@@ -2,13 +2,13 @@ package card;
 
 public class Card {
 	
-	private String cardId;
+	private int cardId;
 	
-	public Card(String cardId) {
+	public Card(int cardId) {
 		this.cardId = cardId;
 	}
 	
-	public String getCardId() {
+	public int getCardId() {
 		return cardId;
 	}
 }

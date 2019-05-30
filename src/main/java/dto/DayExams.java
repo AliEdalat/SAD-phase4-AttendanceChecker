@@ -2,6 +2,7 @@ package dto;
 
 import java.util.ArrayList;
 
+import attendance.ExamAttendance;
 import com.jsoniter.annotation.JsonObject;
 import com.jsoniter.annotation.JsonProperty;
 
@@ -10,11 +11,11 @@ import exam.Exam;
 @JsonObject(asExtraForUnknownProperties = true)
 public class DayExams {
 	@JsonProperty(required = true)
-	int status;
+	private int status;
 	@JsonProperty(required = true)
-	String date;
+	private String date;
 	@JsonProperty(required = true)
-	ArrayList<ExamDTO> classes;
+	private ArrayList<ExamDTO> classes;
 	
 	public int getStatus() {
 		return status;
@@ -28,11 +29,11 @@ public class DayExams {
 		return classes;
 	}
 	
-	public ArrayList<Exam> getExams() {
-		ArrayList<Exam> exams = new ArrayList<>();
+	public ArrayList<ExamAttendance> getExams() {
+		ArrayList<ExamAttendance> examAttendances = new ArrayList<>();
 		for(ExamDTO examDTO : classes) {
-			exams.add(examDTO.getExam());
+			examAttendances.add(examDTO.getExamAttendance());
 		}
-		return exams;
+		return examAttendances;
 	}
 }
