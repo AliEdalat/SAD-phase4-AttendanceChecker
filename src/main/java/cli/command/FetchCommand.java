@@ -6,7 +6,7 @@ import attendance.AttendanceChecker;
 
 public class FetchCommand implements Command {
 
-	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance().getInstance();
+	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance();
 	
 	public void execute() {
 		try {
