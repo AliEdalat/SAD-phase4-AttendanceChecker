@@ -1,6 +1,7 @@
 package attendance;
 
 import exam.Exam;
+import person.Professor;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,10 +13,12 @@ public class ExamAttendance {
 	private ArrayList<ExamAttendanceItem> presenceStudentsList;
 	private Report report;
 
-	public ExamAttendance(Exam exam, ArrayList<ExamAttendanceItem> presenceStudentsList) {
-		this.exam = exam;
+	public ExamAttendance(int examId, int roomNumber, String courseName, String startAt, String endAt, Professor professor,
+						  ArrayList<ExamAttendanceItem> studentAttendances) {
+		this.exam = new Exam(examId, roomNumber, courseName, startAt, endAt, professor);
 		this.isTeacherSigned = false;
-		this.presenceStudentsList = presenceStudentsList;
+		this.presenceStudentsList = studentAttendances;
+
 	}
 
 //	public void teacherSign(String pid) {

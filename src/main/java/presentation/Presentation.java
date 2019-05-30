@@ -14,13 +14,12 @@ public class Presentation {
     private Room room;
     private Professor professor;
 
-    public Presentation(String id, Course course, ArrayList<PresentationTime> presentationTimes, String term, Room room,
-                        Professor professor) {
-        this.id = id;
-        this.course = course;
-        this.presentationTimes = presentationTimes;
-        this.term = term;
-        this.room = room;
+    public Presentation(String courseName, Professor professor) {
+        this.id = "1"; // TODO: Any other idea?!
+        this.course = new Course(courseName);
+        this.presentationTimes = new ArrayList<>();
+        this.term = "95961";
+        this.room = new Room(101);
         this.professor = professor;
     }
 }

@@ -63,6 +63,6 @@ public class ExamDTO {
 		for(StudentDTO studentDTO : students) {
 			studentAttendances.add(studentDTO.getStudentAttendance());
 		}
-		return new ExamAttendance(new Exam(), studentAttendances);
+		return new ExamAttendance(exam_id, room_number, course_name, start_at, end_at, professor.getProfessor(), studentAttendances);
 	}
 }

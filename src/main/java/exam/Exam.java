@@ -3,6 +3,8 @@ package exam;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import person.Professor;
 import person.Student;
 import presentation.Presentation;
 import room.Room;
@@ -14,16 +16,15 @@ public class Exam {
 	private Date end;
 	private Presentation presentation;
 	private Room room;
-	
-	public Exam(int examId, String start, String end, Presentation presentation, Room room,
-			ArrayList<Student> students) {
+
+	public Exam(int examId, int roomNumber, String courseName, String startAt, String endAt, Professor professor) {
 		this.id = examId;
-		this.room = room;
-		this.presentation = new Presentation();
-		this.start = convertTimeStringToDate(start);
-		this.end = convertTimeStringToDate(end);
+		this.room = new Room(roomNumber);
+		this.presentation = new Presentation(courseName, professor);
+		this.start = convertTimeStringToDate(startAt);
+		this.end = convertTimeStringToDate(endAt);
 	}
-	
+
 	private Date convertTimeStringToDate(String time) {
 		int[] timeParts = new int[2];
 		String temp = "";
