@@ -36,4 +36,9 @@ public class DayExams {
 		}
 		return examAttendances;
 	}
+
+	public boolean isExpired(){
+		return false;
+		// TODO
+	}
 }

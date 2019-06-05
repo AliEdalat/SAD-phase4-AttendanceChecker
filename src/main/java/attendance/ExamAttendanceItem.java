@@ -12,6 +12,18 @@ public class ExamAttendanceItem {
         this.chairNumber = chairNumber;
         this.attended = false;
     }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void attendStudent(){
+        this.attended = true;
+    }
+
+    public boolean isAttended(){
+        return this.attended;
+    }
 }
 
 //	public void addStudent(String sid) throws Exception {

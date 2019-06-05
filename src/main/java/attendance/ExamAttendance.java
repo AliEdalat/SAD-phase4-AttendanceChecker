@@ -3,6 +3,7 @@ package attendance;
 import exam.Exam;
 import person.Professor;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,13 +13,87 @@ public class ExamAttendance {
 	private boolean isTeacherSigned;
 	private ArrayList<ExamAttendanceItem> presenceStudentsList;
 	private Report report;
+	private boolean isFinished ;
 
 	public ExamAttendance(int examId, int roomNumber, String courseName, String startAt, String endAt, Professor professor,
 						  ArrayList<ExamAttendanceItem> studentAttendances) {
 		this.exam = new Exam(examId, roomNumber, courseName, startAt, endAt, professor);
 		this.isTeacherSigned = false;
 		this.presenceStudentsList = studentAttendances;
+		this.isFinished = false;
+	}
 
+
+	public boolean isExpired(){
+		return false;
+		// TODO
+	}
+
+	public boolean isFinished(){
+		return this.isFinished;
+	}
+
+	public void finishExam(){
+		this.isFinished = true;
+	}
+
+	public boolean isSigned(){
+		return this.isTeacherSigned;
+	}
+
+	public void professorSign(int id) throws ProcessError{
+		if(this.exam.getPresentation().getProfessor().getId() != id){
+			throw new ProcessError("professor id is not right");
+		}
+		else{
+			this.isTeacherSigned = true;
+		}
+	}
+
+	public int getExamId(){
+		return this.exam.getExamId();
+	}
+
+	public void addStudentByName(String firstName, String lastName) throws ProcessError{
+		ExamAttendanceItem foundedStudent = null;
+		for(ExamAttendanceItem student : this.presenceStudentsList){
+			if (student.getStudent().getFirstName().equals(firstName) && student.getStudent().getLastName().equals(lastName)){
+				foundedStudent = student;
+				break;
+			}
+		}
+
+		if(foundedStudent == null){
+			throw new ProcessError("student not found");
+		}else{
+			foundedStudent.attendStudent();
+		}
+	}
+
+	public void addStudentById(int id) throws ProcessError{
+		ExamAttendanceItem foundedStudent = null;
+		for(ExamAttendanceItem student : this.presenceStudentsList){
+			if (student.getStudent().getId()==id){
+				foundedStudent = student;
+				break;
+			}
+		}
+
+		if(foundedStudent == null){
+			throw new ProcessError("student not found");
+		}else{
+			foundedStudent.attendStudent();
+		}
+	}
+
+	public ArrayList<String> getAttendanceStringList(){
+		ArrayList<String> studentIdList = new ArrayList<>();
+		for (ExamAttendanceItem student : this.presenceStudentsList){
+			if (student.isAttended()){
+				studentIdList.add(Integer.toString(student.getStudent().getId()));
+			}
+		}
+		return studentIdList;
 	}
 
 //	public void teacherSign(String pid) {

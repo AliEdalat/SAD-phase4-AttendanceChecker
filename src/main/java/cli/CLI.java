@@ -38,19 +38,19 @@ public class CLI {
             		throw new Exception("command " + splittedCommand[0] + "is not correct.");
             case "student":
             	if(splittedCommand.length == 2)
-            		return new StudentCommand(splittedCommand[1]);
+            		return new StudentCommand(Integer.parseInt(splittedCommand[1]));
             	else if(splittedCommand.length == 3)
             		return new StudentCommand(splittedCommand[1], splittedCommand[2]);
             	else
             		throw new Exception("command " + splittedCommand[0] + "is not correct.");
             case "finishExam":
-            	if(splittedCommand.length == 2)
-            		return new FinishExamCommand(splittedCommand[1]);
+            	if(splittedCommand.length == 1)
+            		return new FinishExamCommand();
             	else
             		throw new Exception("command " + splittedCommand[0] + "is not correct.");
             case "professor":
             	if(splittedCommand.length == 2)
-            		return new ProfessorCommand(splittedCommand[1]);
+            		return new ProfessorCommand(Integer.parseInt(splittedCommand[1]));
             	else
             		throw new Exception("command " + splittedCommand[0] + "is not correct.");
             case "fetchTodayExams":

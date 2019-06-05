@@ -1,18 +1,22 @@
 package cli.command;
 
 import attendance.AttendanceChecker;
+import attendance.ProcessError;
 
 public class FinishExamCommand implements Command {
 
-	private String eid;
 	private AttendanceChecker attendanceChecker = AttendanceChecker.getInstance();
-	
-	public FinishExamCommand(String eid) {
-		this.eid = eid;
-	}
-	
+
 	public void execute() {
-		
+		try {
+			attendanceChecker.finishExam();
+		}catch(ProcessError e){
+			System.out.println(e);
+		}
+		catch (Exception e) {
+			System.out.print("ERROR : ");
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

@@ -61,8 +61,12 @@ public class Exam {
 	public Room getRoom() {
 		return room;
 	}
-	
-//	public boolean findStudentById(String sId) {
+
+	public Presentation getPresentation() {
+		return presentation;
+	}
+
+	//	public boolean findStudentById(String sId) {
 //		if (students.containsKey(sId)) {
 //			return true;
 //		} else {

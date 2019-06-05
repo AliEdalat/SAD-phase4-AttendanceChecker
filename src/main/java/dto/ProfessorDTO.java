@@ -1,5 +1,6 @@
 package dto;
 
+import attendance.ProcessError;
 import com.jsoniter.annotation.JsonObject;
 import com.jsoniter.annotation.JsonProperty;
 
@@ -14,7 +15,12 @@ public class ProfessorDTO {
 	@JsonProperty(required = true)
 	private String id;
 
-	public Professor getProfessor() {
-		return new Professor(first_name, last_name, id);
+	public int getId() {
+		return Integer.parseInt(this.id);
+	}
+
+
+	public Professor getProfessor(){
+		return new Professor(first_name,last_name,Integer.parseInt(id));
 	}
 }

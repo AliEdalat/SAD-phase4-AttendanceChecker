@@ -22,4 +22,8 @@ public class Presentation {
         this.room = new Room(101);
         this.professor = professor;
     }
+
+    public Professor getProfessor() {
+        return professor;
+    }
 }

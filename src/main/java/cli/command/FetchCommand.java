@@ -3,6 +3,7 @@ package cli.command;
 import java.io.IOException;
 
 import attendance.AttendanceChecker;
+import attendance.ProcessError;
 
 public class FetchCommand implements Command {
 
@@ -11,10 +12,13 @@ public class FetchCommand implements Command {
 	public void execute() {
 		try {
 			attendanceChecker.fetchExams();
-		} catch (IOException e) {
+		}catch(ProcessError e){
+			System.out.println(e);
+		}
+		catch (Exception e) {
+			System.out.print("ERROR : ");
 			System.out.println(e.getMessage());
-			System.out.println("can not fetch exams' information.");
-			attendanceChecker.setFinished(true);
+
 		}
 	}
 

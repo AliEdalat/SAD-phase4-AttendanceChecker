@@ -1,6 +1,9 @@
 package cli.command;
 
 import attendance.AttendanceChecker;
+import attendance.ProcessError;
+
+import java.io.IOException;
 
 public class ExamCommand implements Command{
 	
@@ -12,6 +15,14 @@ public class ExamCommand implements Command{
 	}
 
 	public void execute() {
-		
+		try {
+			attendanceChecker.selectExam(this.eid);
+		}catch(ProcessError e){
+			System.out.println(e);
+		}
+		catch (Exception e) {
+			System.out.print("ERROR : ");
+			System.out.println(e.getMessage());
+		}
 	}
 }
