@@ -65,6 +65,7 @@ public class AttendanceChecker {
 		CLI cli = CLI.getInstance();
         while (!isFinished) {
             try{
+            	showHelpInformation();
                 String[] splittedCommands = cli.parseCommand(cli.getCommand());
                 Command command = cli.createCommand(splittedCommands);
                 command.execute();
@@ -72,6 +73,20 @@ public class AttendanceChecker {
                 System.out.println(e.getMessage());
             }
         }
+	}
+	
+	private void showHelpInformation() {
+		CLI cli = CLI.getInstance();
+		cli.showAllComands();
+		if(processState == ProcessState.notFetched) {
+			cli.showFetchCommand();
+		} else if(processState == ProcessState.fetched) {
+			cli.showExamsComand(todayExamList);
+		} else if(processState == ProcessState.selected) {
+			cli.showStudentsCommand(currentExam);
+		} else if (processState == ProcessState.signed) {
+			cli.showFinishExamComand(currentExam);
+		}
 	}
 
 	// -----------------------------------------------------------------------
@@ -120,6 +135,7 @@ public class AttendanceChecker {
 				}
 			}
 		}
+		processState = ProcessState.fetched;
 
 //        ArrayList<String> list =  new ArrayList<>();
 //        try {
@@ -148,6 +164,7 @@ public class AttendanceChecker {
 
 			this.currentExam.finishExam();
 			this.currentExam = null;
+			processState = ProcessState.fetched;
 		}
 
 	}
@@ -162,6 +179,7 @@ public class AttendanceChecker {
 		}
 		else{
 			this.currentExam.professorSign(id);
+			processState = ProcessState.signed;
 		}
 	}
 
@@ -190,6 +208,7 @@ public class AttendanceChecker {
 		}
 		else{
 			this.currentExam = foundedExam;
+			processState = ProcessState.selected;
 		}
 	}
 
@@ -207,6 +226,6 @@ public class AttendanceChecker {
 	private ArrayList<ExamAttendance> todayExamList;
 	private ExamAttendance currentExam ;
 
-//	private enum ProcessState {notFetched, fetched, selected, signed};
-//	private ProcessState processState = ProcessState.notFetched;
+	private enum ProcessState {notFetched, fetched, selected, signed};
+	private ProcessState processState = ProcessState.notFetched;
 }

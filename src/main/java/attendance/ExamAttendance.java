@@ -2,6 +2,7 @@ package attendance;
 
 import exam.Exam;
 import person.Professor;
+import person.Student;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -21,6 +22,16 @@ public class ExamAttendance {
 		this.isTeacherSigned = false;
 		this.presenceStudentsList = studentAttendances;
 		this.isFinished = false;
+	}
+	
+	public void getStudentsInformation() {
+		for(ExamAttendanceItem examAttendanceItem : presenceStudentsList) {
+			if(!examAttendanceItem.isAttended()) {
+				Student student = examAttendanceItem.getStudent();
+				System.out.println("\t" + student.getId() + ", " + student.getFirstName() + ", " + student.getLastName());
+		
+			}
+		}
 	}
 
 

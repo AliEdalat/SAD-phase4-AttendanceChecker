@@ -15,7 +15,7 @@ public class FetchCommand implements Command {
 		}catch(ProcessError e){
 			System.out.println(e);
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			System.out.print("ERROR : ");
 			System.out.println(e.getMessage());
 
