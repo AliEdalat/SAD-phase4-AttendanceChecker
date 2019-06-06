@@ -10,8 +10,7 @@ public class QuitCommand implements Command {
 	public void execute(){
 		try {
 			attendanceChecker.finishProcess();
-		}
-		catch(Exception e) {
+		}catch(Exception e) {
 			System.out.print("ERROR : ");
 			System.out.println(e.getMessage());
 		}

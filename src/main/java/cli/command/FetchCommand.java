@@ -14,10 +14,9 @@ public class FetchCommand implements Command {
 			attendanceChecker.fetchExams();
 		}catch(ProcessError e){
 			System.out.println(e);
-		}
-		catch (IOException e) {
-			System.out.print("ERROR : ");
-			System.out.println(e.getMessage());
+		}catch (IOException e) {
+			System.out.println("connection error: fetch exams later");
+//			System.out.println(e.getMessage());
 
 		}
 	}

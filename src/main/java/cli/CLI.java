@@ -84,7 +84,8 @@ public class CLI {
 		System.out.println("* 1. fetchTodayExams		// Fetch today exams.");
 		System.out.println("* 2. quit		// Quit.");
 		System.out.println("* 3. exam examId		// Select current exam.");
-		System.out.println("* 4. student studentId		// Add student to present students list.");
+		System.out.println("* 4. student studentId		// Add student to present students list.\n"
+				+ "**   student firstname lastname");
 		System.out.println("* 5. professor professortId		// Give sign of course's professor.");
 		System.out.println("* 6. finishExam		// Send current exam attendance information.");
 		System.out.println("*****************************************************************************");
@@ -114,6 +115,8 @@ public class CLI {
 		System.out.println("\n*mark current exam student like this:");
 		System.out.println("*Enter your command: ");
 		System.out.println("*student studentId");
+		System.out.println("*Enter your command: ");
+		System.out.println("*student firstname lastname");
 		System.out.println("**students: {");
 		currentExam.getStudentsInformation();
 		System.out.println("}");

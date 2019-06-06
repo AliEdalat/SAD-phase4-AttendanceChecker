@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import cli.command.Command;
 import com.jsoniter.output.JsonStream;
+
+import cache.Cache;
 import dto.ExamDTO;
 import dto.PostBody;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -28,6 +30,7 @@ public class AttendanceChecker {
 
 	private AttendanceChecker() {
 		isFinished = false;
+		cache = new Cache();
 	}
 
 	public static AttendanceChecker getInstance() {
@@ -46,7 +49,7 @@ public class AttendanceChecker {
 		return total.toString();
 	}
 	
-	private void post(String completeUrl, String body) {
+	private void post(String completeUrl, String body) throws ProcessError, IOException {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 	    HttpPost httpPost = new HttpPost(completeUrl);
 	    httpPost.setHeader("Content-type", "application/json");
@@ -57,7 +60,8 @@ public class AttendanceChecker {
 
 	        httpclient.execute(httpPost);
 	    } catch (Exception e) {
-	        throw new RuntimeException(e);
+	    	cache.put(body);
+	        throw new ProcessError("connection error: we send requst with this body later.\n\tbody:  " + body);
 	    }
 	}
 	
@@ -156,17 +160,41 @@ public class AttendanceChecker {
 			throw new ProcessError("teacher should sign the exam first");
 		}
 		else{
-//			System.out.println("attendent student num : " + Integer.toString(studentChecker.size()));
-
 			String d = JsonStream.serialize(new PostBody(currentExam.getExamId(), true, this.currentExam.getAttendanceStringList()));
-			System.out.println("log: data sended = " + d);
-			post("http://142.93.134.194:8088/api/attendance", d);
-
-			this.currentExam.finishExam();
-			this.currentExam = null;
-			processState = ProcessState.fetched;
+			try {
+				post("http://142.93.134.194:8088/api/attendance", d);
+				this.currentExam.finishExam();
+				processState = ProcessState.fetched;
+				this.currentExam = null;
+				sendCacheData();
+			} catch (IOException e) {
+				System.out.println("*try to send data again.");
+			} catch(ProcessError pe) {
+				this.currentExam.finishExam();
+				processState = ProcessState.fetched;
+				this.currentExam = null;
+				throw new ProcessError(pe.toString());
+			}
 		}
 
+	}
+	
+	private void sendCacheData() throws IOException {
+		int index = 0;
+		ArrayList<String> dataset = cache.get();
+		try {
+			for(String item : dataset) {
+				post("http://142.93.134.194:8088/api/attendance", item);
+				System.out.println(item);
+				index++;
+			}
+		} catch (Exception e) {
+			ArrayList<String> set = new ArrayList<>();
+			for (int i = index; i < dataset.size(); i++) {
+				set.add(dataset.get(i));
+			}
+			cache.put(set);
+		}
 	}
 
 	public void finishProcess(){
@@ -225,6 +253,7 @@ public class AttendanceChecker {
 	private boolean isFinished;
 	private ArrayList<ExamAttendance> todayExamList;
 	private ExamAttendance currentExam ;
+	private Cache cache;
 
 	private enum ProcessState {notFetched, fetched, selected, signed};
 	private ProcessState processState = ProcessState.notFetched;

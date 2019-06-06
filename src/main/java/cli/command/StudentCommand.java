@@ -29,10 +29,6 @@ public class StudentCommand implements Command {
 		}catch(ProcessError e){
 			System.out.println(e);
 		}
-		catch (Exception e) {
-			System.out.print("ERROR : ");
-			System.out.println(e.getMessage());
-		}
 	}
 
 }
