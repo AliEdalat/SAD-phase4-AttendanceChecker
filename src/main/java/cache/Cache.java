@@ -41,7 +41,7 @@ public class Cache {
 			index = 0;
 		}
 		open();
-		out.println(String.valueOf(index) + " " + data);
+		out.println(index + " " + data);
 		close();
 	}
 	
@@ -51,7 +51,7 @@ public class Cache {
 		fileReader.delete();
 		open();
 		for(String data : dataset)
-			out.println(String.valueOf(index++) + " " + data);
+			out.println((index++) + " " + data);
 		close();
 	}
 	

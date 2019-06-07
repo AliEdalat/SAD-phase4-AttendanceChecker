@@ -79,13 +79,12 @@ public class CLI {
 	public void showAllComands() {
 		System.out.println("********************************** commands *********************************");
 		System.out.println("* 1. FetchTodayExams		// Fetch today exams.");
-		System.out.println("* 2. quit		// Quit.");
-		System.out.println("* 3. StartExam examId		// Select current exam.");
-		System.out.println("* 4. SignStudent studentId		// Check student info.");
-		System.out.println("* 5. AcceptStudent studentId		// Add student to students presence list.");
-		System.out.println("* 6. SignProfessor professortId		// Give sign of course's professor.");
-		System.out.println("* 7. FinishExam		// Send current exam attendance information.");
-		System.out.println("* 8. Quit		// Quit attendance checker system.");
+		System.out.println("* 2. StartExam examId		// Select current exam.");
+		System.out.println("* 3. SignStudent studentId		// Check student info.");
+		System.out.println("* 4. AcceptStudent studentId		// Add student to students presence list.");
+		System.out.println("* 5. SignProfessor professorId		// Give sign of course's professor.");
+		System.out.println("* 6. FinishExam		// Send current exam attendance information.");
+		System.out.println("* 7. Quit		// Quit attendance checker system.");
 		System.out.println("*****************************************************************************");
 	}
 	
