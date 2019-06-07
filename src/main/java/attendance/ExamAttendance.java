@@ -74,8 +74,8 @@ public class ExamAttendance {
 			}
 		}
 
-		if(foundedStudent == null){
-			throw new ProcessError("student not found");
+		if(foundedStudent != null){
+			throw new ProcessError("student has already ");
 		}else{
 			foundedStudent.attendStudent();
 		}
@@ -89,11 +89,25 @@ public class ExamAttendance {
 				break;
 			}
 		}
-
 		if(foundedStudent == null){
-			throw new ProcessError("student not found");
+			throw new ProcessError("Student has not found!");
 		}else{
 			foundedStudent.attendStudent();
+		}
+	}
+
+	public void showStudentInfo(int id) throws ProcessError{
+		ExamAttendanceItem foundedStudent = null;
+		for(ExamAttendanceItem student : this.presenceStudentsList){
+			if (student.getStudent().getId()==id){
+				foundedStudent = student;
+				break;
+			}
+		}
+		if(foundedStudent == null){
+			throw new ProcessError("Student has not found!");
+		}else{
+			foundedStudent.showStudentInfo();
 		}
 	}
 

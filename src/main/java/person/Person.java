@@ -2,9 +2,9 @@ package person;
 
 public class Person {
 	
-	private String firstName;
-	private String lastName;
-	private int id;
+	protected String firstName;
+	protected String lastName;
+	protected int id;
 	
 	public Person(String firstName, String lastName, int id) {
 		this.id = id;

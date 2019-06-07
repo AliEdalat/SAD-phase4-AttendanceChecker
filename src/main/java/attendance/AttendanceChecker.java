@@ -89,27 +89,24 @@ public class AttendanceChecker {
 		} else if(processState == ProcessState.selected) {
 			cli.showStudentsCommand(currentExam);
 		} else if (processState == ProcessState.signed) {
-			cli.showFinishExamComand(currentExam);
+			cli.showFinishExamComand();
 		}
 	}
 
-	// -----------------------------------------------------------------------
-
 	public void addStudentByName(String firstName, String lastName) throws ProcessError{
 		if(isCurrentExamFinished()){
-			throw new ProcessError("there is no selected exam");
+			throw new ProcessError("There is no selected exam!");
 		}else{
 			this.currentExam.addStudentByName(firstName,lastName);
 		}
 	}
 
-	public void addStudentById(int id) throws ProcessError{
+	public void showStudentInfo(int id) throws ProcessError{
 		if(isCurrentExamFinished()){
-			throw new ProcessError("there is no selected exam");
+			throw new ProcessError("There is no selected exam!");
 		}else{
-			this.currentExam.addStudentById(id);
+			this.currentExam.showStudentInfo(id);
 		}
-
 	}
 
 	public void fetchExams() throws IOException,ProcessError {
@@ -140,16 +137,6 @@ public class AttendanceChecker {
 			}
 		}
 		processState = ProcessState.fetched;
-
-//        ArrayList<String> list =  new ArrayList<>();
-//        try {
-//			list.add(todayExams.get(0).findStudenId("عماد", "جبار"));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        String d = JsonStream.serialize(new PostBody(todayExams.get(0).getExamId(), true, list));
-//        post("http://142.93.134.194:8088/api/attendance", d);
 	}
 
 	public void finishExam() throws ProcessError{
@@ -214,7 +201,7 @@ public class AttendanceChecker {
 	public void selectExam(int id) throws ProcessError {
 
 		if(!isCurrentExamFinished()){
-			throw new ProcessError("you have one unfinished exam");
+			throw new ProcessError("you have an unfinished exam!");
 		}
 
 		ExamAttendance foundedExam = null;
@@ -226,13 +213,13 @@ public class AttendanceChecker {
 		}
 
 		if (foundedExam == null){
-			throw new ProcessError("exam id not found");
+			throw new ProcessError("exam id not found!");
 		}
 		else if(foundedExam.isFinished()){
-			throw new ProcessError("exam is finished");
+			throw new ProcessError("exam is finished!");
 		}
 		else if(foundedExam.isExpired()){
-			throw new ProcessError("exam time is expired");
+			throw new ProcessError("exam time is expired!");
 		}
 		else{
 			this.currentExam = foundedExam;
@@ -246,6 +233,14 @@ public class AttendanceChecker {
 		}
 		else{
 			return true;
+		}
+	}
+
+	public void acceptStudentAttendance(int id) throws ProcessError {
+		if(isCurrentExamFinished()){
+			throw new ProcessError("There is no selected exam!");
+		}else{
+			this.currentExam.addStudentById(id);
 		}
 	}
 

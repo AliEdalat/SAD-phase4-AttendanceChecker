@@ -11,4 +11,9 @@ public class Student extends Person{
 		studentCard = new StudentCard(id);
 	}
 
+	public void showInfo(){
+		System.out.println("Student id: " + this.id);
+		System.out.println("First name: " + this.firstName);
+		System.out.println("Last name: " + this.lastName);
+	}
 }

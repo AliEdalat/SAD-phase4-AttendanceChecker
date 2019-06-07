@@ -24,6 +24,11 @@ public class ExamAttendanceItem {
     public boolean isAttended(){
         return this.attended;
     }
+
+    public void showStudentInfo(){
+        student.showInfo();
+        System.out.println("Chair number: " + this.chairNumber);
+    }
 }
 
 //	public void addStudent(String sid) throws Exception {
