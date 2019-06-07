@@ -14,7 +14,8 @@ public class AcceptCommand implements Command {
 
     public void execute() {
         try {
-            attendanceChecker.acceptStudentAttendance(this.sid);
+            if (!attendanceChecker.isEmptyExamsList())
+                attendanceChecker.acceptStudentAttendance(this.sid);
         }catch(ProcessError e){
             System.out.println(e);
         }

@@ -9,7 +9,8 @@ public class FinishExamCommand implements Command {
 
 	public void execute() {
 		try {
-			attendanceChecker.finishExam();
+			if (!attendanceChecker.isEmptyExamsList())
+				attendanceChecker.finishExam();
 		}catch(ProcessError e){
 			System.out.println(e);
 		}

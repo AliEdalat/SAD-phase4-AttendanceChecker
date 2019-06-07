@@ -16,7 +16,8 @@ public class ExamCommand implements Command{
 
 	public void execute() {
 		try {
-			attendanceChecker.selectExam(this.eid);
+			if (!attendanceChecker.isEmptyExamsList())
+				attendanceChecker.selectExam(this.eid);
 		}catch(ProcessError e){
 			System.out.println(e);
 		}

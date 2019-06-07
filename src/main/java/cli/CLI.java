@@ -51,22 +51,22 @@ public class CLI {
 					return new AcceptCommand(Integer.parseInt(splittedCommand[1]));
 				else
 					throw new Exception("command " + splittedCommand[0] + "is not correct.");
-            case "finishExam":
+            case "FinishExam":
             	if(splittedCommand.length == 1)
             		return new FinishExamCommand();
             	else
             		throw new Exception("command " + splittedCommand[0] + "is not correct.");
-            case "professor":
+            case "SignProfessor":
             	if(splittedCommand.length == 2)
             		return new ProfessorCommand(Integer.parseInt(splittedCommand[1]));
             	else
             		throw new Exception("command " + splittedCommand[0] + "is not correct.");
-            case "fetchTodayExams":
+            case "FetchTodayExams":
             	if(splittedCommand.length == 1)
             		return new FetchCommand();
             	else
             		throw new Exception("command " + splittedCommand[0] + "is not correct.");
-            case "quit":
+            case "Quit":
             	if(splittedCommand.length == 1)
             		return new QuitCommand();
             	else
@@ -78,25 +78,26 @@ public class CLI {
 
 	public void showAllComands() {
 		System.out.println("********************************** commands *********************************");
-		System.out.println("* 1. fetchTodayExams		// Fetch today exams.");
+		System.out.println("* 1. FetchTodayExams		// Fetch today exams.");
 		System.out.println("* 2. quit		// Quit.");
 		System.out.println("* 3. StartExam examId		// Select current exam.");
 		System.out.println("* 4. SignStudent studentId		// Check student info.");
 		System.out.println("* 5. AcceptStudent studentId		// Add student to students presence list.");
-		System.out.println("* 6. professor professortId		// Give sign of course's professor.");
-		System.out.println("* 7. finishExam		// Send current exam attendance information.");
+		System.out.println("* 6. SignProfessor professortId		// Give sign of course's professor.");
+		System.out.println("* 7. FinishExam		// Send current exam attendance information.");
+		System.out.println("* 8. Quit		// Quit attendance checker system.");
 		System.out.println("*****************************************************************************");
 	}
 	
 	public void showFetchCommand() {
-		System.out.println("*exam list is empty. fetch today exam like this:");
-		System.out.println("*fetchTodayExams");
+		System.out.println("*Exams list is empty. Fetch today exam like this:");
+		System.out.println("*FetchTodayExams");
 	}
 
 	public void showExamsComand(ArrayList<ExamAttendance> todayExamList) {
-		System.out.println("*select current exam like this:");
+		System.out.println("*Select current exam like this:");
 		System.out.println("*StartExam examId");
-		System.out.print("**examId: {");
+		System.out.print("**ExamIds: {");
 		for(ExamAttendance examAttendance : todayExamList) {
 			if (!examAttendance.isFinished() && !examAttendance.isExpired()) {
 				System.out.print(examAttendance.getExamId());
@@ -108,17 +109,17 @@ public class CLI {
 	}
 
 	public void showStudentsCommand(ExamAttendance currentExam) {
-		System.out.println("*mark current exam student like this:");
+		System.out.println("*Mark current exam student like this:");
 		System.out.println("*SignStudent studentId");
-		System.out.println("**students: {");
+		System.out.println("**Students: {");
 		currentExam.getStudentsInformation();
 		System.out.println("}");
-		System.out.println("*add professor sign like this:");
-		System.out.println("*professor professorId");
+		System.out.println("*Add professor sign like this:");
+		System.out.println("*SignProfessor professorId");
 	}
 
 	public void showFinishExamComand() {
-		System.out.println("*send current exam data like this:");
-		System.out.println("*finishExam");
+		System.out.println("*Send current exam data like this:");
+		System.out.println("*FinishExam");
 	}
 }

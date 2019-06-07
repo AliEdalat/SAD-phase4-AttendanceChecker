@@ -37,6 +37,9 @@ public class AttendanceChecker {
 		return instance;
 	}
 
+	public Boolean isEmptyExamsList(){
+		return todayExamList == null;
+	}
 	private String extractGetData(HttpGet httpGet) throws IOException {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		CloseableHttpResponse response = httpclient.execute(httpGet);
@@ -93,14 +96,6 @@ public class AttendanceChecker {
 		}
 	}
 
-	public void addStudentByName(String firstName, String lastName) throws ProcessError{
-		if(isCurrentExamFinished()){
-			throw new ProcessError("There is no selected exam!");
-		}else{
-			this.currentExam.addStudentByName(firstName,lastName);
-		}
-	}
-
 	public void showStudentInfo(int id) throws ProcessError{
 		if(isCurrentExamFinished()){
 			throw new ProcessError("There is no selected exam!");
@@ -149,7 +144,7 @@ public class AttendanceChecker {
 		else{
 			String d = JsonStream.serialize(new PostBody(currentExam.getExamId(), true, this.currentExam.getAttendanceStringList()));
 			try {
-				post("http://142.93.134.194:8088/api/attendance", d);
+				post("http://142.93.134.194:8088/ap12i/attendance", d);
 				this.currentExam.finishExam();
 				processState = ProcessState.fetched;
 				this.currentExam = null;
@@ -249,7 +244,6 @@ public class AttendanceChecker {
 	private ArrayList<ExamAttendance> todayExamList;
 	private ExamAttendance currentExam ;
 	private Cache cache;
-
 	private enum ProcessState {notFetched, fetched, selected, signed};
 	private ProcessState processState = ProcessState.notFetched;
 }

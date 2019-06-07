@@ -14,7 +14,8 @@ public class ProfessorCommand implements Command {
 	
 	public void execute() {
 		try {
-			attendanceChecker.professorSign(this.pid);
+			if (!attendanceChecker.isEmptyExamsList())
+				attendanceChecker.professorSign(this.pid);
 		}catch(ProcessError e){
 			System.out.println(e);
 		}

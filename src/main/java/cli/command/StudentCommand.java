@@ -14,7 +14,8 @@ public class StudentCommand implements Command {
 	
 	public void execute() {
 		try {
-			attendanceChecker.showStudentInfo(this.sid);
+			if (!attendanceChecker.isEmptyExamsList())
+				attendanceChecker.showStudentInfo(this.sid);
 		}catch(ProcessError e){
 			System.out.println(e);
 		}
